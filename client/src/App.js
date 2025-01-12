@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import Chatbot from "react-chatbot-kit";
+import config from "./config";
+import MessageParser from "./MessageParser";
+import ActionProvider from "./ActionProvider";
 
+// Main App component
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Citizen Portal Chatbot</h1>
       </header>
+
+      <div style={{ position: "absolute", bottom: 10, right: 10 }}>
+        <Chatbot
+          config={config}
+          messageParser={MessageParser}
+          actionProvider={ActionProvider}
+        />
+      </div>
     </div>
   );
 }
