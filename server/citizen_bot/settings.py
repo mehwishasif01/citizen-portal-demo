@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-   ' citizen-portal-demo-api.onrender.com'
+   'citizen-portal-demo-api.onrender.com'
 ]
 
 CORS_ALLOWED_ORIGINS = [
