@@ -129,3 +129,8 @@ def chatbot_view(request):
 
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON format'}, status=400)
+
+
+
+def home(request):
+    return JsonResponse({"message": "Welcome to the Citizen Portal API"})
