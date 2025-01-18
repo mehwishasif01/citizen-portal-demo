@@ -1,27 +1,42 @@
 import React from "react";
-import "./App.css";
-import Chatbot from "react-chatbot-kit";
-import config from "./config";
-import MessageParser from "./MessageParser";
-import ActionProvider from "./ActionProvider";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Header, Footer } from "./components";
 
-// Main App component
-function App() {
+import {
+  Home,
+  SearchResults,
+  ServiceDirectory,
+  FAQS,
+  ContactUs,
+  Chat,
+} from "./pages";
+
+import "./styles/index.css"; // Import global styles
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Citizen Portal Chatbot</h1>
-      </header>
+    <Router>
+      <div className="app-container">
+        {/* Header */}
+        <Header />
 
-      <div style={{ position: "absolute", bottom: 10, right: 10 }}>
-        <Chatbot
-          config={config}
-          messageParser={MessageParser}
-          actionProvider={ActionProvider}
-        />
+        {/* Main Content */}
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            {/* <Route path="/search" element={<SearchResults />} /> */}
+            <Route path="/services" element={<ServiceDirectory />} />
+            <Route path="/faqs" element={<FAQS />} />
+            {/* <Route path="/contact" element={<ContactUs />} /> */}
+            <Route path="/chat" element={<Chat />} />
+          </Routes>
+        </main>
+
+        {/* Footer */}
+        <Footer />
       </div>
-    </div>
+    </Router>
   );
-}
+};
 
 export default App;

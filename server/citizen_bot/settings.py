@@ -25,7 +25,14 @@ SECRET_KEY = "django-insecure-y^xjwxw28nuz!iab--00jqm_!)%&3awip-tx&_!rt@!(_n@sn8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
 
 # Application definition
@@ -37,7 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "chatbot"
+    'corsheaders',
+    "chatbot",
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -48,6 +57,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = "citizen_bot.urls"
