@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: server
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn citizen_bot.wsgi:application"
