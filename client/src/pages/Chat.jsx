@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Container, Typography, Box, Chip } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 import { ChatBox, ChatInput } from "../components";
 import { useMutation } from "@tanstack/react-query";
 import { sendMessage } from "../services/sendMessage";
 
 const ChatPage = () => {
+  const [isTyping, setIsTyping] = useState(false);
   const [messages, setMessages] = useState([
     {
       text: (
@@ -26,6 +27,10 @@ const ChatPage = () => {
 
   const mutation = useMutation({
     mutationFn: sendMessage, // Function that sends the request to the backend
+    onMutate: () => {
+      // Show a "bot is typing" indicator
+      setIsTyping(true);
+    },
     onSuccess: (data) => {
       // Simulate a bot response with data from the backend
       const botResponse = {
@@ -33,9 +38,12 @@ const ChatPage = () => {
         from: "bot",
       };
       setMessages((prevMessages) => [...prevMessages, botResponse]);
+      setIsTyping(false);
     },
     onError: (error) => {
+      setIsTyping(false);
       // Handle error by showing a bot error response
+
       const botError = {
         text:
           "Sorry, I couldn't fetch the information. Please try again later.",
@@ -79,10 +87,8 @@ const ChatPage = () => {
         categories={categories}
         handleChipClick={handleChipClick}
       />
-      <ChatInput
-        onSendMessage={handleSendMessage}
-        isLoading={mutation.isLoading}
-      />
+
+      <ChatInput onSendMessage={handleSendMessage} isLoading={isTyping} />
     </Container>
   );
 };
